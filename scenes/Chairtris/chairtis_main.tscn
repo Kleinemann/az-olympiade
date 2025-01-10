@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://kul7xf8o5qk7"]
+
+[ext_resource type="Script" path="res://scenes/Chairtris/chairtis_main.gd" id="1_kkdgb"]
+[ext_resource type="Texture2D" uid="uid://culyl6ewda8wl" path="res://assets/tet_back.png" id="2_iufob"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shlv0"]
+albedo_color = Color(0.270588, 0.756863, 0.0588235, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_si2ed"]
+material = SubResource("StandardMaterial3D_shlv0")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uq3rq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mx66y"]
+transparency = 1
+albedo_color = Color(0, 0.890196, 0.894118, 0.72549)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lwoys"]
+material = SubResource("StandardMaterial3D_mx66y")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6t4tx"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_kkdgb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.995846, 0.0910497, 0, -0.0910497, 0.995846, 0, 8.88573, 10.0935)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.898219, 0.439547, 0, -0.439547, 0.898219, 0, 8.93274, 6.8872)
+
+[node name="Level" type="Node" parent="."]
+
+[node name="Bottom" type="StaticBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Bottom"]
+transform = Transform3D(12, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_si2ed")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Bottom"]
+shape = SubResource("BoxShape3D_uq3rq")
+
+[node name="Back" type="StaticBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 7.5, -1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Back"]
+transform = Transform3D(10, 0, 0, 0, 14, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lwoys")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Back"]
+shape = SubResource("BoxShape3D_6t4tx")
+
+[node name="Front" type="StaticBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 1)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Front"]
+transform = Transform3D(12, 0, 0, 0, 12, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lwoys")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Front"]
+shape = SubResource("BoxShape3D_6t4tx")
+
+[node name="Rigth" type="StaticBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 7.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Rigth"]
+transform = Transform3D(1, 0, 0, 0, 14, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lwoys")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Rigth"]
+shape = SubResource("BoxShape3D_6t4tx")
+
+[node name="Left" type="StaticBody3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 7.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level/Left"]
+transform = Transform3D(1, 0, 0, 0, 14, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lwoys")
+skeleton = NodePath("../../Rigth")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Left"]
+shape = SubResource("BoxShape3D_6t4tx")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.52563, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -14.3736)
+pixel_size = 0.05
+texture = ExtResource("2_iufob")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 977.0
+offset_top = 5.0
+offset_right = 1153.0
+offset_bottom = 64.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=blue]Next :[/color]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+offset_right = 128.0
+offset_bottom = 62.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=blue]Lines :[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+offset_left = 129.0
+offset_top = 3.0
+offset_right = 225.0
+offset_bottom = 65.0
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=blue]0[/color]"
