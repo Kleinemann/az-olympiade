@@ -166,7 +166,7 @@ func check_rows() -> void:
 		get_node("RichTextLabel3").clear()
 		get_node("RichTextLabel3").append_text(blub)
 		for y in del:
-			speed -= (speed / 5)
+			speed -= (speed / 10)
 			for x in cols:
 				grid[y][x].queue_free()
 				grid[y][x] = null
